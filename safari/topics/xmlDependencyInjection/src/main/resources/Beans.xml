@@ -4,9 +4,49 @@
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="pointTen" class="hliu.spring.pkg.Point">
-        <property name="x" value="0"/>
-        <property name="y" value="10"/>
+    <bean id="pointIntAuto" class="hliu.spring.pkg.Point">
+        <constructor-arg value="pointIntAuto"/>
+        <constructor-arg value="0"/>
+        <constructor-arg value="10"/>
     </bean>
 
+    <bean id="pointFloatAuto" class="hliu.spring.pkg.Point">
+        <constructor-arg value="pointFloatAuto"/>
+        <constructor-arg value="0.1"/>
+        <constructor-arg value="10.3"/>
+    </bean>
+
+    <!--This throws EXP-->
+    <!--<bean id="pointCastInt" class="hliu.spring.pkg.Point">-->
+        <!--<constructor-arg value="point float"/>-->
+        <!--<constructor-arg type="int" value="0.1"/>-->
+        <!--<constructor-arg value="10.3"/>-->
+    <!--</bean>-->
+
+    <bean id="pointCastFloat" class="hliu.spring.pkg.Point">
+        <!--property before or after constructor-arg behave the Same-->
+        <property name="msg" value="pointCastFloatMsgUpdated"/>
+
+        <constructor-arg type="float" value="1"/>
+        <constructor-arg index="1" value="10"/>
+        <constructor-arg index="0" value="pointCastFloat"/>
+    </bean>
+
+    <bean id="GRAY" class="hliu.spring.pkg.Color" factory-method="valueOf">
+        <constructor-arg value="GRAY"/>
+    </bean>
+
+    <bean id="grayPoint" class="hliu.spring.pkg.ColorPoint">
+        <constructor-arg index="0" ref="GRAY"/>
+        <constructor-arg index="1" ref="pointIntAuto"/>
+    </bean>
+    
+    <bean id="blackPoint" class="hliu.spring.pkg.ColorPoint">
+        <constructor-arg index="0">
+            <bean id="BLACK" class="hliu.spring.pkg.Color" factory-method="valueOf">
+                <constructor-arg value="BLACK"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg index="1" ref="pointFloatAuto"/>
+    </bean>
 </beans>

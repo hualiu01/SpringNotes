@@ -25,3 +25,8 @@ The container gets the configuration metadata of a Bean. What are the forms of m
 1) xml
 2) java annotations
 3) java code
+
+The "ref" tagged bean scope?
+* Be there a caller or not, the reffed beans are always constructed.
+For the compiler, the construction order is: first, construct all the beans;
+Second, link the reffed beans.
